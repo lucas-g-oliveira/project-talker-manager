@@ -1,5 +1,7 @@
 version: "3"
 
+#docker exec -it talker_manager bash   //comando para acessar o bash do container
+
 services:
   # Serviço que irá rodar o node
   node:
