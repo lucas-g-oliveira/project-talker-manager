@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFile } = require('./fsUtils');
+const { getFile, getTalkerById } = require('./fsUtils');
 
 const app = express();
 app.use(express.json());
@@ -21,4 +21,8 @@ app.get('/talker', async (_request, response) => {
   return response.status(200).json(data);
 });
 
-module.exports = app;
+app.get('/talker/:id', async (request, response) => {
+  const idSearch = request.params.id;
+  const data = await getTalkerById(idSearch);
+  return response.status(data.status).json(data.data);
+});
