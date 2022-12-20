@@ -34,11 +34,18 @@ async function addNewTalker(talker) {
   const data = await getFile();
   const ids = data.map((e) => e.id);
   const newID = Math.max(...ids) + 1;
-  data.push({ ...talker, id: newID });
-  // console.log(data);
-  await replaceFile(data);
+  const newTalker = { ...talker, id: newID };
+  await replaceFile([...data, newTalker]);
 
   return { ...talker, id: newID };
+}
+
+async function editTalkerById(id, newData) {
+  const data = await getFile();
+  const delTalker = data.filter((e) => e.id !== id);
+  const edited = { ...newData, id: Number(id) };
+  await replaceFile([...delTalker, edited]);
+  return edited;
 }
 
 module.exports = {
@@ -46,4 +53,5 @@ module.exports = {
   replaceFile,
   getTalkerById,
   addNewTalker,
+  editTalkerById,
 };
