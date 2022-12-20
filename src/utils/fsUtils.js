@@ -30,8 +30,20 @@ async function getTalkerById(num) {
   return { status: 404, data: { message: 'Pessoa palestrante não encontrada' } };
 }
 
+async function addNewTalker(talker) {
+  const data = await getFile();
+  const ids = data.map((e) => e.id);
+  const newID = Math.max(...ids) + 1;
+  data.push({ ...talker, id: newID });
+  // console.log(data);
+  await replaceFile(data);
+
+  return { ...talker, id: newID };
+}
+
 module.exports = {
   getFile,
   replaceFile,
   getTalkerById,
+  addNewTalker,
 };

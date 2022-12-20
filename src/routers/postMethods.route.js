@@ -1,25 +1,26 @@
-const router = require('express').Router();
-const tokenGenerator = require('../utils/tokenGenerator');
-const {
-  emailValidator,
-  passwordValidator,
-  ageValidator,
-  nameValidator,
-  rateValidator,
-  talkValidator,
-  watchedAtValidator,
-} = require('../middlewares/validation');
+const express = require('express');
 
-router.post('/login', emailValidator, passwordValidator, (req, res) => {
+const router = express.Router();
+
+const tokenGenerator = require('../utils/tokenGenerator');
+const utils = require('../utils/fsUtils');
+const fx = require('../middlewares/validation');
+
+router.post('/login', fx.emailValidator, fx.passwordValidator, (req, res) => {
   const data = tokenGenerator(16);
   return res.status(200).json({ token: data });
 });
 
-router.use(ageValidator);
-router.use(nameValidator);
-router.use(rateValidator);
-router.use(talkValidator);
-router.use(watchedAtValidator);
+router.use(fx.tokenValidator);
+router.use(fx.nameValidator);
+router.use(fx.talkValidator);
+router.use(fx.watchedAtValidator);
+router.use(fx.rateValidator);
+router.use(fx.ageValidator);
 
-router.post('/talket', (req, res) => res.status(201).json(req.body));
+router.post('/talker', async (req, res) => {
+  const newTalker = await utils.addNewTalker(req.body);
+  return res.status(201).json(newTalker);
+});
+
 module.exports = router;

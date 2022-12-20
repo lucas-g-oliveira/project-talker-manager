@@ -1,5 +1,6 @@
 const express = require('express');
-const allRouters = require('./routers');
+const getMethods = require('./routers/getMethods.route');
+const postMethods = require('./routers/postMethods.route');
 
 const app = express();
 app.use(express.json());
@@ -9,7 +10,8 @@ const PORT = '3000';
 
 /* não remova esse endpoint, e para o avaliador funcionar */
 
-app.use(allRouters);
+app.use(getMethods);
+app.use(postMethods);
 
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
