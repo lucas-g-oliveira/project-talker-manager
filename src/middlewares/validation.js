@@ -1,4 +1,5 @@
 const ifExistsKey = require('../utils/ifHaveKeys');
+const utils = require('../utils/fsUtils');
 
 const CODE_401 = '401';
 const CODE_400 = '400';
@@ -71,6 +72,20 @@ function rateValidator(req, res, next) {
   next();
 }
 
+async function deleteTalker(req, res, next) {
+  const { id } = req.params;
+  const info = await utils.deleteById(id);
+  if (!info) return res.status(204).json({ message: 'Pessoa palestrante não encontrada' });
+  next();
+}
+
+async function idValidator(req, res, next) {
+  const { id } = req.params;
+  const data = await utils.editTalkerById(Number(id));
+  if (data.status === 404) return resExpress(res, 401, data.message);
+  next();
+}
+
 module.exports = {
   nameValidator,
   talkValidator,
@@ -80,4 +95,13 @@ module.exports = {
   passwordValidator,
   rateValidator,
   tokenValidator,
+  deleteTalker,
+  idValidator,
 };
+
+/* 
+404 
+      JSON: {
+          "message": "Pessoa palestrante não encontrada"
+      }
+*/

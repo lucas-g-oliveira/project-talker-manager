@@ -48,10 +48,21 @@ async function editTalkerById(id, newData) {
   return edited;
 }
 
+async function deleteById(id) {
+  const data = await getFile();
+  const keyExists = data.map((e) => e.id).includes(Number(id));
+  if (!keyExists) return false;
+  const dataUpdate = data.filter((e) => e.id !== Number(id));
+  console.log(dataUpdate);
+  await replaceFile(dataUpdate);
+  return true;
+}
+
 module.exports = {
   getFile,
   replaceFile,
   getTalkerById,
   addNewTalker,
   editTalkerById,
+  deleteById,
 };
