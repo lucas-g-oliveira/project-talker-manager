@@ -1,9 +1,10 @@
-const ifExistsKey = require('../utils/ifHaveKeys');
 const utils = require('../utils/fsUtils');
 
 const CODE_401 = '401';
 const CODE_400 = '400';
 const resExpress = (res, code, msgErr) => res.status(code).json({ message: msgErr });
+
+const ifExistsKey = (key, object) => Object.keys(object).includes(key);
 
 const resKeyNotFound = (res, key) => {
   const msg = `O campo "${key}" é obrigatório`;
@@ -93,8 +94,8 @@ async function searchWithToken(req) {
   if (!ifExistsKey(key, req.headers)) return { code: CODE_401, data: { message: msg[0] } };
   if ((typeof authorization) !== 'string') return { code: CODE_401, data: { message: msg[1] } };
   if (authorization.length !== 16) return { code: CODE_401, data: { message: msg[1] } };
-const result = await utils.searchTalkerByContainInName(req.query.q);
-return { code: result[0], data: result[1] };
+  const result = await utils.searchTalkerByContainInName(req.query.q);
+  return { code: result[0], data: result[1] };
 }
 
 async function getMethodWithTokenValidator(req, res, _next) {

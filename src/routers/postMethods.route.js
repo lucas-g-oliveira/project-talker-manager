@@ -9,7 +9,7 @@ const fx = require('../middlewares/validation');
 router.post('/login',
 fx.emailValidator,
 fx.passwordValidator,
-(req, res) => {
+(_req, res) => {
   const data = tokenGenerator(16);
   return res.status(200).json({ token: data });
 });

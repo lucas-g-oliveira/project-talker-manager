@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllTalkers } = require('../getFunctions');
+const { getAllTalkers } = require('../utils/fsUtils');
 const fx = require('../middlewares/validation');
 
 const router = express.Router();

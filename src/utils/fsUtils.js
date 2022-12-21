@@ -64,10 +64,16 @@ async function searchTalkerByContainInName(search) {
   return [200, filter];
 }
 
+async function getAllTalkers() {
+  const data = await getFile();
+  return data;
+}
+
 module.exports = {
   getFile,
   replaceFile,
   getTalkerById,
+  getAllTalkers,
   addNewTalker,
   editTalkerById,
   deleteById,
