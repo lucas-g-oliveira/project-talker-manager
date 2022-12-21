@@ -1,1 +1,0 @@
-// const allValidator = require('./centerValidation');

@@ -86,6 +86,27 @@ async function idValidator(req, res, next) {
   next();
 }
 
+async function searchWithToken(req) {
+  const key = 'authorization';
+  const msg = ['Token não encontrado', 'Token inválido'];
+  const { authorization } = req.headers;
+  if (!ifExistsKey(key, req.headers)) return { code: CODE_401, data: { message: msg[0] } };
+  if ((typeof authorization) !== 'string') return { code: CODE_401, data: { message: msg[1] } };
+  if (authorization.length !== 16) return { code: CODE_401, data: { message: msg[1] } };
+const result = await utils.searchTalkerByContainInName(req.query.q);
+return { code: result[0], data: result[1] };
+}
+
+async function getMethodWithTokenValidator(req, res, _next) {
+  if (req.params.id === 'search') {
+    const tokenInfo = await searchWithToken(req);
+    console.log(tokenInfo);
+    return res.status(tokenInfo.code).json(tokenInfo.data);
+  }
+  const data = await utils.getTalkerById(req.params.id);
+  return res.status(data.status).json(data.data);
+}
+
 module.exports = {
   nameValidator,
   talkValidator,
@@ -97,11 +118,5 @@ module.exports = {
   tokenValidator,
   deleteTalker,
   idValidator,
+  getMethodWithTokenValidator,
 };
-
-/* 
-404 
-      JSON: {
-          "message": "Pessoa palestrante não encontrada"
-      }
-*/

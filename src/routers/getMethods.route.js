@@ -1,5 +1,6 @@
 const express = require('express');
-const { getAllTalkers, getTalkerById } = require('../getFunctions');
+const { getAllTalkers } = require('../getFunctions');
+const fx = require('../middlewares/validation');
 
 const router = express.Router();
 
@@ -8,9 +9,6 @@ router.get('/talker', async (_request, response) => {
   return response.status(200).json(data);
 });
 
-router.get('/talker/:id', async (request, response) => {
-  const data = await getTalkerById(request.params.id);
-  return response.status(data.status).json(data.data);
-});
+router.get('/talker/:id', fx.getMethodWithTokenValidator);
 
 module.exports = router;

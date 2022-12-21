@@ -53,9 +53,15 @@ async function deleteById(id) {
   const keyExists = data.map((e) => e.id).includes(Number(id));
   if (!keyExists) return false;
   const dataUpdate = data.filter((e) => e.id !== Number(id));
-  console.log(dataUpdate);
   await replaceFile(dataUpdate);
   return true;
+}
+
+async function searchTalkerByContainInName(search) {
+  const data = await getFile();
+  if (search === undefined || search === '') return [200, data];
+  const filter = data.filter((e) => e.name.includes(search));
+  return [200, filter];
 }
 
 module.exports = {
@@ -65,4 +71,5 @@ module.exports = {
   addNewTalker,
   editTalkerById,
   deleteById,
+  searchTalkerByContainInName,
 };
