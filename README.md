@@ -2,7 +2,7 @@
 
 ### Projeto de backend sem frontend
 
-Criar uma API Rest com funções de CRUD para gerênciar palestrantes usando Docker, Express a lib fs.
+Criar uma API Rest com funções de CRUD para gerênciar palestrantes usando Docker, Express e a lib fs.
 ## Preview:
 
  <img src="images/preview.png" width="900px" >
