@@ -1,11 +1,18 @@
 # Talker Manager (API-REST)
 
-## Objetivos:
+### Projeto de backend sem frontend
+
+Criar uma API Rest com funções de CRUD para gerênciar palestrantes usando Docker, Express a lib fs.
+## Preview:
+
+ <img src="images/preview.png" width="900px" >
+
+## Objetivo:
 <section>
 - Criar uma API de CRUD
 </br> - Praticar aprendizados de Docker
 </br> - Praticar aprendizados de Express
-</br> - Praticar aprendizados de Banco de Dados
+</br> - Manipular dados a partir de arquivo do sistema de arquivos
 
 </section>
 
@@ -30,10 +37,5 @@
 - Desenvolvido por mim: Os `requisitos alcançados` e `objetivos` citados acima e readme.md.
 
 - Desenvolvido pela Trybe: Todo conteúdo, testes, configurações e etc, exceto o desenvolvido por mim conforme citado acima.
-
-
-<!-- ## Preview:
-
- <img src="images/preview.png" width="900px" > -->
 
 
