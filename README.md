@@ -55,7 +55,7 @@ POST
   RESPONSE: {"token": "TOKEN ALEATÓRIO"}
 ```
 Buscar um palestrante pelo id:
-```http
+```
 GET - http://localhost:3000/talker/:id
 
 RESPONSE EX:
@@ -139,15 +139,13 @@ RESPONSE:
 }
 ```
 Deletar um palestrante:
-  ```http
+  ```
   http://localhost:3000/talker/:id
 
   RESPONSE EX:
 
   OK
   ```
-
-  ADICIONAR
 
 ## Objetivo:
 <section>
@@ -166,7 +164,7 @@ Deletar um palestrante:
 
 ## Créditos:
 
-- Desenvolvido por mim: Os `requisitos alcançados` e `objetivos` citados acima e readme.md.
+- Desenvolvido por mim: A regra de negócio, os endpoints citados acima, e readme.md.
 
 - Desenvolvido pela Trybe: Todo conteúdo, testes, configurações e etc, exceto o desenvolvido por mim conforme citado acima.
 
